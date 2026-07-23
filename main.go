@@ -28,10 +28,10 @@ func NewPlayer(name string, goals, misses, assists int) Player {
 
 func calculateRating(goals, misses, assists float64) float64 {
 	if misses == 0 {
-		return (goals + assists) / 2
+		return (goals + assists / 2)
 	}
 
-	return (goals + assists) / 2 / misses
+	return (goals + assists / 2) / misses
 }
 
 func goalsSort(players []Player) []Player {
@@ -43,7 +43,13 @@ func goalsSort(players []Player) []Player {
 		} else if a.Goals > b.Goals{
 			return -1
 		} else{
-			return 0
+			if a.Name > b.Name{
+				return 1
+			} else if a.Name < b.Name{
+				return -1
+			} else{
+				return 0
+			}
 		}
 	})
 
@@ -59,7 +65,13 @@ func ratingSort(players []Player) []Player {
 		} else if a.Rating > b.Rating{
 			return -1
 		} else{
-			return 0
+			if a.Name > b.Name{
+				return 1
+			} else if a.Name < b.Name{
+				return -1
+			} else{
+				return 0
+			}
 		}
 	})
 
@@ -75,7 +87,13 @@ func gmSort(players []Player) []Player {
 		} else if float64(a.Goals) / float64(a.Misses) > float64(b.Goals) / float64(b.Misses){
 			return -1
 		} else{
-			return 0
+			if a.Name > b.Name{
+				return 1
+			} else if a.Name < b.Name{
+				return -1
+			} else{
+				return 0
+			}
 		}
 	})
 
