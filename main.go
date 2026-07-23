@@ -1,5 +1,9 @@
 package main
 
+import (
+	"slices"
+)
+
 type Player struct {
 	Name    string
 	Goals   int
@@ -31,13 +35,49 @@ func calculateRating(goals, misses, assists float64) float64 {
 }
 
 func goalsSort(players []Player) []Player {
-	return nil
+	sortedPlayers := slices.Clone(players)
+
+	slices.SortFunc(sortedPlayers, func (a, b Player) int{
+		if a.Goals < b.Goals{
+			return 1
+		} else if a.Goals > b.Goals{
+			return -1
+		} else{
+			return 0
+		}
+	})
+
+	return sortedPlayers
 }
 
 func ratingSort(players []Player) []Player {
-	return nil
+	sortedPlayers := slices.Clone(players)
+
+	slices.SortFunc(sortedPlayers, func (a, b Player) int{
+		if a.Rating < b.Rating{
+			return 1
+		} else if a.Rating > b.Rating{
+			return -1
+		} else{
+			return 0
+		}
+	})
+
+	return sortedPlayers
 }
 
 func gmSort(players []Player) []Player {
-	return nil
+	sortedPlayers := slices.Clone(players)
+
+	slices.SortFunc(sortedPlayers, func (a, b Player) int{
+		if float64(a.Goals) / float64(a.Misses) < float64(b.Goals) / float64(b.Misses){
+			return 1
+		} else if float64(a.Goals) / float64(a.Misses) > float64(b.Goals) / float64(b.Misses){
+			return -1
+		} else{
+			return 0
+		}
+	})
+
+	return sortedPlayers
 }
